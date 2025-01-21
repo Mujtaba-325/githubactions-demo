@@ -4,26 +4,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: use node.js
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
       - run: npm install
       - run: npm run build
+
   test: 
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: use node.js
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
       - run: npm install
       - run: npm test
+
   deploy: 
     needs: test
     permissions:
@@ -35,24 +37,24 @@ jobs:
       url: ${{ steps.deployment.outputs.page-url }}
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: &{{ secrets.GITHUB_TOKEN }}
-      - name: use node.js
+          token: ${{ secrets.GITHUB_TOKEN }} # Corrected ampersand
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-      - name: configure github pages
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v4
-        wit:
+        with: # Corrected typo "wit" -> "with"
           static_site_generator: next
       - run: npm install
       - run: npm run build
-      - name: upload artifacts
-        uses: action/upload-pages-artifacts@v3
+      - name: Upload artifacts
+        uses: actions/upload-pages-artifacts@v3 # Corrected action name
         with:
           path: './out'
-      - name: deploy
-        id: deplyment
+      - name: Deploy
+        id: deployment # Corrected "deplyment" -> "deployment"
         uses: actions/deploy-pages@v4
