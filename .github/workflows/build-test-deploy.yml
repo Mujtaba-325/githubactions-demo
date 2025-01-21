@@ -56,5 +56,5 @@ jobs:
         with:
           path: './out'
       - name: Deploy
-        id: deployment # Corrected "deplyment" -> "deployment"
+        id: deployment 
         uses: actions/deploy-pages@v4
