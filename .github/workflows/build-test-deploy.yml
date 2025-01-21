@@ -52,7 +52,7 @@ jobs:
       - run: npm install
       - run: npm run build
       - name: Upload artifacts
-        uses: actions/upload-pages-artifacts@v3 # Corrected action name
+        uses: actions/upload-pages-artifact@v3 # Corrected action name
         with:
           path: './out'
       - name: Deploy
